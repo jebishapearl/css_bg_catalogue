@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css BG Catalogue</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-tabs">
+            <button class="main-tab" data-tab="rosegold">Rosegold</button>
+            <button class="main-tab" data-tab="coquette">Coquette</button>
+            <button class="main-tab" data-tab="80s">80s Theme</button>
+            <button class="main-tab" data-tab="purplish">Purplish</button>
+        </div>
+        <div class="top-tabs">
+            <div id="rosegold-subtabs" class="subtabs">
+                <button class="sub-tab" data-bg="rosegold-1">Rosegold 1</button>
+                <button class="sub-tab" data-bg="rosegold-2">Rosegold 2</button>
+                <button class="sub-tab" data-bg="rosegold-3">Rosegold 3</button>
+                <button class="sub-tab" data-bg="rosegold-4">Rosegold 4</button>
+                <button class="sub-tab" data-bg="rosegold-5">Rosegold 5</button>
+            </div>
+            <div id="coquette-subtabs" class="subtabs">
+                <button class="sub-tab" data-bg="coquette-1">Coquette 1</button>
+                <button class="sub-tab" data-bg="coquette-2">Coquette 2</button>
+                <button class="sub-tab" data-bg="coquette-3">Coquette 3</button>
+                <button class="sub-tab" data-bg="coquette-4">Coquette 4</button>
+                <button class="sub-tab" data-bg="coquette-5">Coquette 5</button>
+            </div>
+            <div id="80s-subtabs" class="subtabs">
+                <button class="sub-tab" data-bg="80s-1">80s 1</button>
+                <button class="sub-tab" data-bg="80s-2">80s 2</button>
+                <button class="sub-tab" data-bg="80s-3">80s 3</button>
+                <button class="sub-tab" data-bg="80s-4">80s 4</button>
+                <button class="sub-tab" data-bg="80s-5">80s 5</button>
+            </div>
+            <div id="purplish-subtabs" class="subtabs">
+                <button class="sub-tab" data-bg="purplish-1">Purplish 1</button>
+                <button class="sub-tab" data-bg="purplish-2">Purplish 2</button>
+                <button class="sub-tab" data-bg="purplish-3">Purplish 3</button>
+                <button class="sub-tab" data-bg="purplish-4">Purplish 4</button>
+                <button class="sub-tab" data-bg="purplish-5">Purplish 5</button>
+            </div>
+        </div>
+        <div class="content">
+            <p>Background will change based on tab selection.</p>
+        </div>
+    </div>
+    <script> 
+
+        // script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const mainTabs = document.querySelectorAll('.main-tab');
+    const subtabs = document.querySelectorAll('.subtabs');
+    const subTabs = document.querySelectorAll('.sub-tab');
+    const body = document.body;
+
+    // Show the first set of subtabs by default
+    if (mainTabs.length > 0 && subtabs.length > 0) {
+        const firstTabName = mainTabs[0].dataset.tab;
+        const firstSubtabs = document.getElementById(`${firstTabName}-subtabs`);
+        if (firstSubtabs) {
+            firstSubtabs.classList.add('active');
+            mainTabs[0].classList.add("active-tab");
+        }
+    }
+
+    mainTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.dataset.tab;
+            mainTabs.forEach(mt => mt.classList.remove('active-tab')); // Remove from all main tabs
+            tab.classList.add('active-tab'); // Add to the clicked tab
+            subtabs.forEach(st => {
+                st.classList.remove('active');
+                if (st.id === `${tabName}-subtabs`) {
+                    st.classList.add('active');
+                }
+            });
+        });
+    });
+
+    subTabs.forEach(subTab => {
+        subTab.addEventListener('click', () => {
+          subTabs.forEach(st => st.classList.remove('active-tab'));
+          subTab.classList.add('active-tab');
+            const bgName = subTab.dataset.bg;
+
+            if (bgName === 'coquette-1') {
+                body.style.background = 'linear-gradient(to bottom right, #f8d1d1, #f9e4e4, #e09bba)';
+            }
+            // Placeholders for other backgrounds
+            else if (bgName === 'rosegold-1') {
+                body.style.background = 'linear-gradient(135deg, #FFDAB9, #FFE4E1)'; // Example Placeholder
+            }
+            // ... (rest of the background logic)
+        });
+    });
+});
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
